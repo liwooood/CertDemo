@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<TITLE>New Page</TITLE>
+</HEAD>
+<script language="javascript" type="text/javascript">
+function findCertByDN()
+{
+alert("开始测试");
+	var ret = CertActiveX.FindCertByDN("C=CN, O=CSDC Test, OU=Access, CN=63159284@64159283");
+	if (ret == 1)
+		alert("found");
+	else
+		alert("not found");
+}
+
+function createCSR()
+{
+    var ret = CertActiveX.CreateCSR();
+    alert(ret);
+}
+
+function installCert()
+{
+	alert("开始测试");
+    var ret = CertActiveX.InstallCert("cert base64 string");
+    alert(ret);
+}
+
+function sign()
+{
+	alert("开始测试");
+    var signResult = CertActiveX.Sign("C=CN, O=CSDC Test, OU=Customers01, CN=C@1@100001060", "测试123");
+    alert(signResult);
+	
+	var ret = CertActiveX.Verify("C=CN, O=CSDC Test, OU=Customers01, CN=C@1@100001060", "测试123", signResult);
+	alert(ret);
+
+}
+
+function delCert()
+{
+var ret = CertActiveX.DeleteCert("CN=C@1@100004060, OU=Customers01, O=CSDC Test, C=CN");
+    alert(ret);
+}
+
+</script>
+<BODY>
+
+<OBJECT ID="CertActiveX" WIDTH=0 HEIGHT=0
+ CLASSID="CLSID:24465789-5BD9-435C-85AF-8B90D7CA8956">
+    <PARAM NAME="_Version" VALUE="65536">
+    <PARAM NAME="_ExtentX" VALUE="0">
+    <PARAM NAME="_ExtentY" VALUE="0">
+    <PARAM NAME="_StockProps" VALUE="0">
+</OBJECT>
+
+<form name="form1" method="post" action="">
+
+  <input type="button" name="btnFind" id="btnFind" value="查询证书" onclick="javascript:findCertByDN()">
+  <input type="button" name="btnCreateCSR" id="btnCreateCSR" value="创建CSR" onclick="javascript:createCSR()">
+  <input type="button" name="btnInstallCert" id="btnInstallCert" value="安装证书" onclick="javascript:installCert()">
+  <input type="button" name="btnSign" id="btnSign" value="签名及验签" onclick="javascript:sign()">
+
+  <input type="button" name="btnDel" id="btnDel" value="删除" onclick="javascript:delCert()">
+ 
+</form>
+</BODY>
+</HTML>

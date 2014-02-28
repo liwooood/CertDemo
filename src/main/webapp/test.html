@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<TITLE>New Page</TITLE>
+</HEAD>
+<script language="javascript" type="text/javascript">
+var plugin = null;
+
+function findCertByDN()
+{
+    alert("开始测试");
+    plugin = document.getElementById('pluginCssswebCert');
+	var ret = plugin.FindCertByDN("CN=C@1@100004060, OU=Customers01, O=CSDC Test, C=CN");
+	if (ret == 1)
+		alert("found");
+	else
+		alert("not found");
+}
+
+function createCSR()
+{
+    plugin = document.getElementById('pluginCssswebCert');
+    var ret = plugin.CreateCSR();
+    document.getElementById('val').innerText = ret ;
+
+}
+
+function installCert()
+{
+	plugin = document.getElementById('pluginCssswebCert');
+    var ret = plugin.InstallCert("cert base64 string");
+    alert(ret);
+}
+
+function sign()
+{
+	plugin = document.getElementById('pluginCssswebCert');
+    var signResult = plugin.Sign("C=CN, O=CSDC Test, OU=Customers01, CN=C@1@100001060", "测试123");
+    alert(signResult);
+	
+	
+
+}
+
+</script>
+<BODY>
+
+<embed id="pluginCssswebCert" type="application/cssweb_cert_plugin"> 
+
+<form name="form1" method="post" action="">
+
+  <input type="button" name="btnFind" id="btnFind" value="查询证书" onclick="javascript:findCertByDN()">
+  <input type="button" name="btnCreateCSR" id="btnCreateCSR" value="创建CSR" onclick="javascript:createCSR()">
+  <input type="button" name="btnInstallCert" id="btnInstallCert" value="安装证书" onclick="javascript:installCert()">
+  <input type="button" name="btnSign" id="btnSign" value="签名及验签" onclick="javascript:sign()">
+ 
+</form>
+<div id="val"></div>
+
+
+</BODY>
+</HTML>
+

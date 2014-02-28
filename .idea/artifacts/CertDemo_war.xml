@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="CertDemo:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="CertDemo.war">
+      <element id="artifact" artifact-name="CertDemo:war exploded" />
+    </root>
+  </artifact>
+</component>
